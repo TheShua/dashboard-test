@@ -23,13 +23,19 @@ const User = ({match}) => {
     const dispatch = useDispatch();
 
     const generateDiagnostic = () => {
+        // Calculate the timer to imitate lag of a request (in seconds)
         let timer = Math.floor(Math.random() * (config.timerMax - config.timerMin + 1) + config.timerMin);
         timer = Math.floor(timer / 60);
+        // Calculate the Date with added timer
         let date = new Date();
         date.setSeconds(date.getSeconds() + timer);
-        let secs = Math.floor((new Date(date).getTime() - new Date()) / 1000);
+        // let secs = Math.floor((new Date(date).getTime() - new Date()) / 1000);
+        // Sending datas to the Redux state
+        // Edit the state of the user to prevent more diagnostics
         dispatch(editState({ id: user.id, state: 'Ongoing treatment...' }));
-        dispatch(addTask({id: idCount, user, timer: secs}));
+        // Add task to get feedback of ongoing treatments
+        dispatch(addTask({ id: idCount, user, timer: date }));
+        // Increment the id for further tasks
         dispatch(increment());
     }
 

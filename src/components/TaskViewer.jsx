@@ -13,35 +13,30 @@ import { TaskWorld, Tasklist, Icon } from '../styles/Tasks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks } from '@fortawesome/free-solid-svg-icons'
 
-
 const TaskViewer = () => {
     const [showTask, setShowTask] = useState(true);
     const tasks = useSelector(state => state.task);
     const dispatch = useDispatch();
 
-    console.log(tasks);
-
+    // Toggle task visibility
     const showTasks = () => {
         setShowTask(!showTask);
     }
 
+    // Complete the task
     const doDiagnostic = (task) => {
+        // Edit the state of the user
         dispatch(editState({ id: task.user.id, state: 'Diagnostic' }));
+        // Remove the task
         dispatch(endTask(task.id))
-    }
-
-    const showList = () => {
-        return (
-            <Tasklist>
-                {tasks.map((task, i) => <TaskTimer task={task} key={i} show={showTask} cb={doDiagnostic} />)}
-            </Tasklist>
-        )
     }
 
     return (
         <TaskWorld>
             <Icon className={showTask ? '' : 'faded'}><FontAwesomeIcon icon={faTasks} onClick={showTasks} /></Icon>
-            {showList()}
+            <Tasklist>
+                {tasks.map((task, i) => <TaskTimer task={task} key={i} show={showTask} cb={doDiagnostic} />)}
+            </Tasklist>
         </TaskWorld>
     );
 }

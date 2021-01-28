@@ -1,4 +1,4 @@
-export const addTask = ({id, user, timer}) => {
+export const addTask = ({id, user, timer, start}) => {
     return {
         type: 'TASK_ADD_ACTION',
         payload: {id: id, user: user, timer: timer}

@@ -24,11 +24,11 @@ export const RessourceBoard = styled.table`
             text-align: left;
             :nth-child(1) {
                 border-radius: 10px 0 0 0;
-                width: 33%;
+                width: 25%;
             }
             :nth-child(3) {
                 border-radius: 0 10px 0 0;
-                width: 33%;
+                width: 50%;
             }
         }
     }
