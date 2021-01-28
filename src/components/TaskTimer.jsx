@@ -6,10 +6,12 @@ import Loader from './Loader';
 // Styles
 import { Element } from '../styles/Tasks';
 
+// Utils
+import {config} from '../utils/config'
+
 const TaskTimer = ({ task, cb, show }) => {
     const [timeleft, setTimeleft] = useState(Math.floor((new Date(task.timer).getTime() - new Date()) / 1000));
     const [classN, setClassN] = useState("");
-    const debug = false;
 
     useEffect(() => { 
         // Little delay for animation
@@ -32,7 +34,7 @@ const TaskTimer = ({ task, cb, show }) => {
     
     return (
         <Element className={`${show && classN}`}>
-            {task.user.firstname} {task.user.lastname} {debug && timeleft} <Loader />
+            {task.user.firstname} {task.user.lastname} {config.debug && timeleft} <Loader />
         </Element>
     );
 }
